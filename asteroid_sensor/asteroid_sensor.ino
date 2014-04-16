@@ -198,5 +198,5 @@ void loop(void)
     lcd.print(z); lcd.print(" ");  lcd.print(headingDegrees);
   }
   
-  delay(500);
+  delay(10 * 1000);
 }

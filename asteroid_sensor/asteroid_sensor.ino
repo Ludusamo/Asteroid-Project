@@ -34,7 +34,6 @@
 #include <Adafruit_HMC5883_U.h>
 #include <Adafruit_MCP23017.h>
 #include <Adafruit_RGBLCDShield.h>
-#include <processing,ser
 
 /* Assign a unique ID to this sensor at the same time */
 Adafruit_HMC5883_Unified mag = Adafruit_HMC5883_Unified(12345);
@@ -52,8 +51,6 @@ Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 
 
 boolean X, Y, Z, HEADING, ALL;
-Serial mySerial;
-PrintWriter output;
 
 void displaySensorDetails(void)
 {
@@ -87,7 +84,12 @@ void setup(void)
   }
   
   /* Display some basic information on this sensor */
-  displaySensorDetails();
+//  displaySensorDetails();
+  Serial.println("X   Y   Z   Heading:Distance (cm)");
+}
+
+void newCell() {
+  Serial.print("   "); 
 }
 
 void loop(void) 
@@ -101,9 +103,9 @@ void loop(void)
   float z = event.magnetic.z;
    
   /* Display the results (magnetic vector values are in micro-Tesla (uT)) */
-  Serial.print("X: "); Serial.print(x); Serial.print("  ");
-  Serial.print("Y: "); Serial.print(y); Serial.print("  ");
-  Serial.print("Z: "); Serial.print(z); Serial.print("  ");Serial.println("uT");
+  Serial.print(x); newCell();
+  Serial.print(y); newCell();
+  Serial.print(z); newCell();
   
   float heading = atan2(y, x);
 
@@ -121,11 +123,11 @@ void loop(void)
   // Convert radians to degrees for readability.
   float headingDegrees = heading * 180/M_PI; 
   
-  Serial.print("Heading (degrees): "); Serial.println(headingDegrees);
+  Serial.print(headingDegrees); newCell();
   
   int optical_value = 4800 / (analogRead(OPTICAL_PIN) - 20);
   
-  Serial.print("Optical Value: "); Serial.println(optical_value);
+  Serial.println(optical_value);
   
   uint8_t buttons = lcd.readButtons();
   if (buttons) {

@@ -34,6 +34,7 @@
 #include <Adafruit_HMC5883_U.h>
 #include <Adafruit_MCP23017.h>
 #include <Adafruit_RGBLCDShield.h>
+#include <processing,ser
 
 /* Assign a unique ID to this sensor at the same time */
 Adafruit_HMC5883_Unified mag = Adafruit_HMC5883_Unified(12345);
@@ -47,7 +48,12 @@ Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 #define VIOLET 0x5
 #define WHITE 0x7
 
+#define OPTICAL_PIN 0
+
+
 boolean X, Y, Z, HEADING, ALL;
+Serial mySerial;
+PrintWriter output;
 
 void displaySensorDetails(void)
 {
@@ -93,20 +99,14 @@ void loop(void)
   float x = event.magnetic.x;
   float y = event.magnetic.y;
   float z = event.magnetic.z;
- 
+   
   /* Display the results (magnetic vector values are in micro-Tesla (uT)) */
   Serial.print("X: "); Serial.print(x); Serial.print("  ");
   Serial.print("Y: "); Serial.print(y); Serial.print("  ");
   Serial.print("Z: "); Serial.print(z); Serial.print("  ");Serial.println("uT");
-
-  // Hold the module so that Z is pointing 'up' and you can measure the heading with x&y
-  // Calculate heading when the magnetometer is level, then correct for signs of axis.
-  float heading = atan2(y, x);
   
-  // Once you have your heading, you must then add your 'Declination Angle', which is the 'Error' of the magnetic field in your location.
-  // Find yours here: http://www.magnetic-declination.com/
-  // Mine is: -13* 2' W, which is ~13 Degrees, or (which we need) 0.22 radians
-  // If you cannot find your Declination, comment out these two lines, your compass will be slightly off.
+  float heading = atan2(y, x);
+
   float declinationAngle = 0.22;
   heading += declinationAngle;
   
@@ -122,6 +122,10 @@ void loop(void)
   float headingDegrees = heading * 180/M_PI; 
   
   Serial.print("Heading (degrees): "); Serial.println(headingDegrees);
+  
+  int optical_value = 4800 / (analogRead(OPTICAL_PIN) - 20);
+  
+  Serial.print("Optical Value: "); Serial.println(optical_value);
   
   uint8_t buttons = lcd.readButtons();
   if (buttons) {
@@ -164,6 +168,8 @@ void loop(void)
     }
   }
   
+  lcd.clear();
+  
   if (X) {
     lcd.setBacklight(RED);
     lcd.setCursor(0, 0);
@@ -179,7 +185,9 @@ void loop(void)
   } else if (HEADING) {
     lcd.setBacklight(TEAL);
     lcd.setCursor(0, 0);
-    lcd.print("Heading: "); lcd.print(headingDegrees);
+    lcd.print("Distance (cm): "); 
+    lcd.setCursor(0, 1);
+    lcd.print(optical_value);
   } else if (ALL) {
     lcd.setBacklight(VIOLET);
     lcd.setCursor(0, 0);

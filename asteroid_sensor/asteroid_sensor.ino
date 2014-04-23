@@ -29,6 +29,7 @@
 
  ***************************************************************************/
 
+#include <VirtualWire.h>
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_HMC5883_U.h>
@@ -39,6 +40,7 @@
 Adafruit_HMC5883_Unified mag = Adafruit_HMC5883_Unified(12345);
 Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 
+// Constants
 #define RED 0x1
 #define YELLOW 0x3
 #define GREEN 0x2
@@ -52,8 +54,7 @@ Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 
 boolean X, Y, Z, HEADING, ALL;
 
-void displaySensorDetails(void)
-{
+void displaySensorDetails(void) {
   sensor_t sensor;
   mag.getSensor(&sensor);
   Serial.println("------------------------------------");
@@ -68,28 +69,56 @@ void displaySensorDetails(void)
   delay(500);
 }
 
+void setupTransmitter() {
+  vw_set_ptt_inverted(true); // Required for RF Link module
+  vw_setup(2000);                 // Bits per sec
+  vw_set_tx_pin(3);                // pin 3 is used as the transmit data out into the TX Link module, change this as per your needs 
+}
+
+void sendMessage(const char* msg) {
+  if (vw_send((uint8_t *)msg, strlen(msg))) Serial.println(msg);
+  else Serial.println("I am not sending because I am mad."); 
+  vw_wait_tx();                                          // Wait for message to finish
+}
+
 void setup(void) 
 {
   Serial.begin(9600);
-  Serial.println("HMC5883 Magnetometer Test"); Serial.println("");
-  
-  lcd.begin(16, 2);
+  setupTransmitter();
   
   /* Initialise the sensor */
-  if(!mag.begin())
-  {
-    /* There was a problem detecting the HMC5883 ... check your connections */
+  if(!mag.begin()) {
     Serial.println("Ooops, no HMC5883 detected ... Check your wiring!");
     while(1);
   }
   
-  /* Display some basic information on this sensor */
-//  displaySensorDetails();
-  Serial.println("X   Y   Z   Heading:Distance (cm)");
+  delay(20 * 1000);
+  Serial.println("New Data: ");
 }
 
+// Formats it so that it will create a new cell when opened in excel
 void newCell() {
   Serial.print("   "); 
+}
+
+void printData(float x, float y, float z, int optical_value) {
+  Serial.print(x); newCell();
+  Serial.print(y); newCell();
+  Serial.print(z); newCell();
+  
+  Serial.println(optical_value);
+}
+
+float calculateData(float x, float y, float z) {
+  return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
+}
+
+void sendData(float x, float y, float z, int optical_value) {
+  char msg[4];
+  dtostrf(calculateData(x, y, z), 4, 4, msg);
+  sendMessage(msg);
+  dtostrf(optical_value, 4, 4, msg);
+  sendMessage(msg);
 }
 
 void loop(void) 
@@ -98,105 +127,16 @@ void loop(void)
   sensors_event_t event; 
   mag.getEvent(&event);
   
+  // Gets the X, Y, and Z component
   float x = event.magnetic.x;
   float y = event.magnetic.y;
   float z = event.magnetic.z;
-   
-  /* Display the results (magnetic vector values are in micro-Tesla (uT)) */
-  Serial.print(x); newCell();
-  Serial.print(y); newCell();
-  Serial.print(z); newCell();
-  
-  float heading = atan2(y, x);
-
-  float declinationAngle = 0.22;
-  heading += declinationAngle;
-  
-  // Correct for when signs are reversed.
-  if(heading < 0)
-    heading += 2*PI;
-    
-  // Check for wrap due to addition of declination.
-  if(heading > 2*PI)
-    heading -= 2*PI;
-   
-  // Convert radians to degrees for readability.
-  float headingDegrees = heading * 180/M_PI; 
-  
-  Serial.print(headingDegrees); newCell();
   
   int optical_value = 4800 / (analogRead(OPTICAL_PIN) - 20);
   
-  Serial.println(optical_value);
+  printData(x, y, z, optical_value);
   
-  uint8_t buttons = lcd.readButtons();
-  if (buttons) {
-    lcd.clear();
-    lcd.setCursor(0,0);
-    if (buttons & BUTTON_UP) {
-      X = true;
-      Y = false;
-      Z = false;
-      HEADING = false;
-      ALL = false;
-    }
-    if (buttons & BUTTON_DOWN) {
-      X = false;
-      Y = false;
-      Z = true;
-      HEADING = false;
-      ALL = false;
-    }
-    if (buttons & BUTTON_LEFT) {
-      X = false;
-      Y = true;
-      Z = false;
-      HEADING = false;
-      ALL = false;
-    }
-    if (buttons & BUTTON_RIGHT) {
-      X = false;
-      Y = false;
-      Z = false;
-      HEADING = true;
-      ALL = false;
-    }
-    if (buttons & BUTTON_SELECT) {
-      X = false;
-      Y = false;
-      Z = false;
-      HEADING = false;
-      ALL = true;
-    }
-  }
-  
-  lcd.clear();
-  
-  if (X) {
-    lcd.setBacklight(RED);
-    lcd.setCursor(0, 0);
-    lcd.print("X: "); lcd.print(x);
-  } else if (Y) {
-    lcd.setBacklight(YELLOW);
-    lcd.setCursor(0, 0);
-    lcd.print("Y: "); lcd.print(y);
-  } else if (Z) {
-    lcd.setBacklight(GREEN);
-    lcd.setCursor(0, 0);
-    lcd.print("Z: "); lcd.print(z);
-  } else if (HEADING) {
-    lcd.setBacklight(TEAL);
-    lcd.setCursor(0, 0);
-    lcd.print("Distance (cm): "); 
-    lcd.setCursor(0, 1);
-    lcd.print(optical_value);
-  } else if (ALL) {
-    lcd.setBacklight(VIOLET);
-    lcd.setCursor(0, 0);
-    lcd.print(x); lcd.print(" "); lcd.print(y); 
-    lcd.setCursor(0, 1);
-    lcd.print(z); lcd.print(" ");  lcd.print(headingDegrees);
-  }
+  sendData(x, y, z, optical_value);
   
   delay(10 * 1000);
 }

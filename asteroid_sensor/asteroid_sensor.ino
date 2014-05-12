@@ -1,34 +1,3 @@
-/***************************************************************************
-  This is a library example for the HMC5883 magnentometer/compass
-
-  Designed specifically to work with the Adafruit HMC5883 Breakout
-  http://www.adafruit.com/products/1746
- 
-  *** You will also need to install the Adafruit_Sensor library! ***
-
-  These displays use I2C to communicate, 2 pins are required to interface.
-
-  Adafruit invests time and resources providing this open source code,
-  please support Adafruit andopen-source hardware by purchasing products
-  from Adafruit!
-
-  Written by Kevin Townsend for Adafruit Industries with some heading example from
-  Love Electronics (loveelectronics.co.uk)
- 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the version 3 GNU General Public License as
- published by the Free Software Foundation.
- 
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
- ***************************************************************************/
-
 #include <VirtualWire.h>
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
@@ -40,21 +9,6 @@
 Adafruit_HMC5883_Unified mag = Adafruit_HMC5883_Unified(12345);
 
 #define OPTICAL_PIN 0
-
-void displaySensorDetails(void) {
-  sensor_t sensor;
-  mag.getSensor(&sensor);
-  Serial.println("------------------------------------");
-  Serial.print  ("Sensor:       "); Serial.println(sensor.name);
-  Serial.print  ("Driver Ver:   "); Serial.println(sensor.version);
-  Serial.print  ("Unique ID:    "); Serial.println(sensor.sensor_id);
-  Serial.print  ("Max Value:    "); Serial.print(sensor.max_value); Serial.println(" uT");
-  Serial.print  ("Min Value:    "); Serial.print(sensor.min_value); Serial.println(" uT");
-  Serial.print  ("Resolution:   "); Serial.print(sensor.resolution); Serial.println(" uT");  
-  Serial.println("------------------------------------");
-  Serial.println("");
-  delay(500);
-}
 
 void setupTransmitter() {
   vw_set_ptt_inverted(true); // Required for RF Link module
@@ -79,7 +33,6 @@ void setup(void)
     while(1);
   }
   
-  delay(10 * 1000);
   Serial.println("New Data: ");
 }
 
@@ -96,6 +49,7 @@ void printData(float x, float y, float z, int optical_value) {
   Serial.println(optical_value);
 }
 
+//Calculating the magnetic vector sum
 float calculateData(float x, float y, float z) {
   return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
 }

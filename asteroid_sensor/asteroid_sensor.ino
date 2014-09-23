@@ -1,3 +1,4 @@
+#include <TinyWireM.h>
 #include <VirtualWire.h>
 #include <Wire.h>
 #include <Adafruit_Sensor.h>
@@ -9,6 +10,7 @@
 Adafruit_HMC5883_Unified mag = Adafruit_HMC5883_Unified(12345);
 
 #define OPTICAL_PIN 0
+#define SLAVE_ADDRESS 0x48
 
 void setupTransmitter() {
   vw_set_ptt_inverted(true); // Required for RF Link module
@@ -27,6 +29,9 @@ void setup(void)
   Serial.begin(9600);
   setupTransmitter();
   
+  // Starts TinyWire master library
+  //TinyWireM.begin();
+  
   /* Initialise the sensor */
   if(!mag.begin()) {
     Serial.println("Ooops, no HMC5883 detected ... Check your wiring!");
@@ -36,18 +41,17 @@ void setup(void)
   Serial.println("New Data: ");
 }
 
-// Formats it so that it will create a new cell when opened in excel
-void newCell() {
-  Serial.print("   "); 
-}
+//void newCell() {
+//  Serial.print("   "); 
+//}
 
-void printData(float x, float y, float z, int optical_value) {
-  Serial.print(x); newCell();
-  Serial.print(y); newCell();
-  Serial.print(z); newCell();
-  
-  Serial.println(optical_value);
-}
+//void printData(float x, float y, float z, int optical_value) {
+//  Serial.print(x); newCell();
+//  Serial.print(y); newCell();
+//  Serial.print(z); newCell();
+//  
+//  Serial.println(optical_value);
+//}
 
 //Calculating the magnetic vector sum
 float calculateData(float x, float y, float z) {
@@ -65,7 +69,7 @@ void sendData(float x, float y, float z, int optical_value) {
 void loop(void) 
 {
   /* Get a new sensor event */ 
-  sensors_event_t event; 
+  sensors_event_t event;
   mag.getEvent(&event);
   
   // Gets the X, Y, and Z component
@@ -75,9 +79,15 @@ void loop(void)
   
   int optical_value = 4800 / (analogRead(OPTICAL_PIN) - 20);
   
-  printData(x, y, z, optical_value);
+  //printData(x, y, z, optical_value);
   
   sendData(x, y, z, optical_value);
   
-  delay(10 * 1000);
+  delay(5 * 100);
+}
+
+void requestData() {
+  //TinyWireM.beginTransmission(SLAVE_ADDRESS);
+  
+  //TinyWireM.endTransmission();
 }

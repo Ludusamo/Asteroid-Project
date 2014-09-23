@@ -18,8 +18,9 @@
 #define BLUE 0x4
 #define VIOLET 0x5
 #define WHITE 0x7
-#define DELAY 10000
+#define DELAY 500
 
+#define MAX_NUM_POINTS 1000
 //Defining object for display
 Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 
@@ -33,6 +34,8 @@ const int chipSelect = 10;
 //Defining variables for timing
 float currentTime, lastTime, elapsedTime;
 
+int numDataPoints = 0;
+
 //Defining variables to hold data
 String magVecSum, dis;
 int nextRead = 0;
@@ -40,6 +43,47 @@ int nextRead = 0;
 void newCell() {
   Serial.print("   "); 
 }
+
+class vector2f {
+public:
+  float x, y;
+  
+  vector2f() : x(0), y(0) {}
+  vector2f(float x, float y) : x(x), y(y) {}
+};
+
+vector2f points[MAX_NUM_POINTS];
+
+float stof(String string) {
+  char bufferArray[32];
+  string.toCharArray(bufferArray, sizeof(bufferArray));
+  float output = atof(bufferArray);
+  return output;
+}
+
+float calculateSlope() {
+  int numSlopes = 0;
+  float output = 0;
+  for (int i = 0; i < numDataPoints; i++) {
+    for (int j = i + 1; j < numDataPoints; j++) {
+      output += ((points[j].y - points[i].y) / (points[j].x - points[i].x));
+      numSlopes++;
+    }
+  }
+  
+  output /= numSlopes;
+  return output; 
+}
+
+//void elimOutliers() {
+//  int currentIndex = 0;
+//  for (int i = 0; i < numDataPoints; i++) {
+//     if (points[i].x <= 30) {
+//       finalPoints[currentIndex] = points[i];
+//       currentIndex++;
+//     } 
+//  }
+//}
 
 //Function for converting ASCII integers to a string object
 String asciiToString(uint8_t* buf, int buflen) {
@@ -62,6 +106,7 @@ String asciiToString(uint8_t* buf, int buflen) {
 
 void setup() {
     Serial.begin(9600);
+    Serial.println("Serial Port has started.");
     
     //Starts the wire library
     Wire.begin();
@@ -114,6 +159,7 @@ void receiveMessage() {
 }
 
 void loop() {
+    
   receiveMessage();//Constantly receiving messages
   
   // Timing
@@ -127,18 +173,29 @@ void loop() {
     //Opens the file on the SD card
     File dataFile = SD.open("datalog", FILE_WRITE);
 
+    String distance, magnetic;
+
+    distance = dis.substring(0,6);
+    magnetic = magVecSum.substring(0, 6);
+
     // if the file is available, write to it:
-    if (dataFile) {
-      dataFile.println(dis.substring(0,6) + "   " + magVecSum.substring(0, 6));
-      Serial.println(magVecSum.substring(0, 6));
-      dataFile.close();
-      // print to the serial port too:
-      Serial.println(magVecSum + "   " + dis);
-    }  
-    // if the file isn't open, pop up an error:
-    else {
-      Serial.println("error opening datalog.txt");
-    } 
+    if (stof(distance) <= 30) {
+      if (dataFile) {
+        dataFile.println(distance + "   " + magnetic);
+        Serial.println(magVecSum.substring(0, 6));
+        dataFile.close();
+        // print to the serial port too:
+        Serial.println(magVecSum + "   " + dis);
+      }  
+      // if the file isn't open, pop up an error:
+      else {
+        Serial.println("error opening datalog.txt");
+      }
+     
+      // Appends to the array of points
+      points[numDataPoints] = vector2f(stof(distance), stof(magnetic));
+      numDataPoints++;
+    }
   }
   
   // LCD Printing

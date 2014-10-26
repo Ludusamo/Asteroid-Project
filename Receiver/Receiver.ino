@@ -1,7 +1,6 @@
 #include <VirtualWire.h>    // you must download and install the VirtualWire.h to your hardware/libraries folder
 #include <Wire.h>
 #include <Adafruit_MCP23017.h>
-#include <Adafruit_RGBLCDShield.h>
 #include <SD.h>
 
 #undef int
@@ -21,8 +20,6 @@
 #define DELAY 500
 
 #define MAX_NUM_POINTS 1000
-//Defining object for display
-Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 
 //File name for data log 
 const char filename[] = "datalog.txt";
@@ -34,6 +31,10 @@ const int chipSelect = 10;
 //Defining variables for timing
 float currentTime, lastTime, elapsedTime;
 
+int xPoints[1000];
+int yPoints[1000];
+int finalXPoints[1000];
+int finalYPoints[1000];
 int numDataPoints = 0;
 
 //Defining variables to hold data
@@ -43,16 +44,6 @@ int nextRead = 0;
 void newCell() {
   Serial.print("   "); 
 }
-
-class vector2f {
-public:
-  float x, y;
-  
-  vector2f() : x(0), y(0) {}
-  vector2f(float x, float y) : x(x), y(y) {}
-};
-
-vector2f points[MAX_NUM_POINTS];
 
 float stof(String string) {
   char bufferArray[32];
@@ -66,7 +57,7 @@ float calculateSlope() {
   float output = 0;
   for (int i = 0; i < numDataPoints; i++) {
     for (int j = i + 1; j < numDataPoints; j++) {
-      output += ((points[j].y - points[i].y) / (points[j].x - points[i].x));
+      output += ((yPoints[j] - yPoints[i]) / (xPoints[j] - xPoints[i]));
       numSlopes++;
     }
   }
@@ -75,21 +66,22 @@ float calculateSlope() {
   return output; 
 }
 
-//void elimOutliers() {
-//  int currentIndex = 0;
-//  for (int i = 0; i < numDataPoints; i++) {
-//     if (points[i].x <= 30) {
-//       finalPoints[currentIndex] = points[i];
-//       currentIndex++;
-//     } 
-//  }
-//}
+void elimOutliers() {
+  int currentIndex = 0;
+  for (int i = 0; i < numDataPoints; i++) {
+     if (xPoints[i] <= 30) {
+       finalXPoints[currentIndex] = xPoints[i];
+       finalYPoints[currentIndex] = yPoints[i];
+       currentIndex++;
+     } 
+  }
+}
 
 //Function for converting ASCII integers to a string object
 String asciiToString(uint8_t* buf, int buflen) {
   String str, final = "";
   int x;
-  for (int i = 0; i <= buflen; i++) {
+  for (int i = 0; i <= buflen - 1; i++) {
     str = "";
     str += buf[i];
     x = str.toInt();
@@ -108,11 +100,11 @@ void setup() {
     Serial.begin(9600);
     Serial.println("Serial Port has started.");
     
+    pinMode(13, OUTPUT);
+    digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
+    
     //Starts the wire library
     Wire.begin();
-        
-    //Initializes the LCD monitor
-    lcd.begin(16, 2); //WIDTH,HEIGHT in characters
 
 // Initialise the IO and ISR
     vw_set_ptt_inverted(true);    // Required for RX Link Module
@@ -142,26 +134,24 @@ void setup() {
     Serial.println("Card Initialized.");
 }
 
-//Function for receiving the message
+// Function for receiving the message
 void receiveMessage() {
   uint8_t buf[VW_MAX_MESSAGE_LEN];
   uint8_t buflen = VW_MAX_MESSAGE_LEN;
-  if (vw_get_message(buf, &buflen)) {   
-    Serial.print(asciiToString(buf, buflen) + " ");
-    newCell();
-    if (nextRead == 0) {
-      magVecSum = asciiToString(buf, buflen);
-      nextRead = 1; 
-    } else {
-      dis = asciiToString(buf, buflen);
+  if (vw_get_message(buf, &buflen)) {
+    for (int i = 0; i < buflen; i++) {
+      if (buf[i] == 'm') {
+        magVecSum = asciiToString(buf, buflen);
+      }
+      if (buf[i] == 'd') {
+        dis = asciiToString(buf, buflen);
+      }  
     }
   }
 }
 
 void loop() {
-    
   receiveMessage();//Constantly receiving messages
-  
   // Timing
   currentTime = millis();
   if (currentTime - lastTime >= DELAY) {
@@ -175,52 +165,29 @@ void loop() {
 
     String distance, magnetic;
 
-    distance = dis.substring(0,6);
-    magnetic = magVecSum.substring(0, 6);
+    distance = dis.substring(0,3);
+    magnetic = magVecSum.substring(0, 3);
+    
+    Serial.println(distance + " " + magnetic);
 
     // if the file is available, write to it:
-    if (stof(distance) <= 30) {
-      if (dataFile) {
-        dataFile.println(distance + "   " + magnetic);
-        Serial.println(magVecSum.substring(0, 6));
-        dataFile.close();
-        // print to the serial port too:
-        Serial.println(magVecSum + "   " + dis);
-      }  
-      // if the file isn't open, pop up an error:
-      else {
-        Serial.println("error opening datalog.txt");
-      }
-     
-      // Appends to the array of points
-      points[numDataPoints] = vector2f(stof(distance), stof(magnetic));
-      numDataPoints++;
-    }
-  }
-  
-  // LCD Printing
-  lcd.setCursor(0, 1);
-  uint8_t buttons = lcd.readButtons();
-  if (buttons) {
-    lcd.clear();
-    lcd.setCursor(0,0);
-    if (buttons & BUTTON_UP) {
-      lcd.print("Mag Vec Sum:");
-      lcd.setCursor(0, 1);
-      lcd.print(magVecSum);
-      lcd.setBacklight(RED);
-    }
-    if (buttons & BUTTON_DOWN) {
-      lcd.print("Timer:");
-      lcd.setCursor(0, 1);
-      lcd.print(currentTime - lastTime);
-      lcd.setBacklight(TEAL);
-    }
-    if (buttons & BUTTON_LEFT) {
-      lcd.print("Distance:");
-      lcd.setCursor(0, 1);
-      lcd.print(dis);
-      lcd.setBacklight(GREEN);
-    }
+//    if (stof(distance) <= 30) {
+//      if (dataFile) {
+//        dataFile.println(distance + "   " + magnetic);
+//        Serial.println(magVecSum.substring(0, 6));
+//        dataFile.close();
+//        // print to the serial port too:
+//        Serial.println(magVecSum + "   " + dis);
+//      }  
+//      // if the file isn't open, pop up an error:
+//      else {
+//        Serial.println("error opening datalog.txt");
+//      }
+//     
+//      // Appends to the array of points
+////      xPoints[numDataPoints] = stof(distance);
+////      yPoints[numDataPoints] = stof(magnetic);
+//      numDataPoints++;
+//    }
   }
 }

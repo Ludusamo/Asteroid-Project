@@ -1,57 +1,34 @@
 #include <TinyWireM.h>
 #include <VirtualWire.h>
-#include <Wire.h>
 #include <Adafruit_Sensor.h>
-#include <Adafruit_HMC5883_U.h>
-#include <Adafruit_MCP23017.h>
-#include <Adafruit_RGBLCDShield.h>
 
 /* Assign a unique ID to this sensor at the same time */
-Adafruit_HMC5883_Unified mag = Adafruit_HMC5883_Unified(12345);
+//Adafruit_HMC5883_Unified mag = Adafruit_HMC5883_Unified(12345);
 
-#define OPTICAL_PIN 0
-#define SLAVE_ADDRESS 0x48
+#define BITS_PER_SECOND 2000
+#define OPTICAL_PIN 3
+#define TRANSMITTER_PIN 4
+#define MAG_ADDRESS 0x1E
 
 void setupTransmitter() {
   vw_set_ptt_inverted(true); // Required for RF Link module
-  vw_setup(2000);                 // Bits per sec
-  vw_set_tx_pin(3);                // pin 3 is used as the transmit data out into the TX Link module, change this as per your needs 
+  vw_setup(BITS_PER_SECOND);                 // Bits per sec
+  vw_set_tx_pin(TRANSMITTER_PIN);                // pin 4 is used as the transmit data out into the TX Link module, change this as per your needs 
 }
 
 void sendMessage(const char* msg) {
-  if (vw_send((uint8_t *)msg, strlen(msg))) Serial.println(msg);
-  else Serial.println("I am not sending because I am mad."); 
+  vw_send((uint8_t *)msg, strlen(msg));
   vw_wait_tx();                                          // Wait for message to finish
 }
 
 void setup(void) 
 {
-  Serial.begin(9600);
   setupTransmitter();
   
   // Starts TinyWire master library
-  //TinyWireM.begin();
-  
-  /* Initialise the sensor */
-  if(!mag.begin()) {
-    Serial.println("Ooops, no HMC5883 detected ... Check your wiring!");
-    while(1);
-  }
-  
-  Serial.println("New Data: ");
+  TinyWireM.begin();
+  setupMagnetometer();
 }
-
-//void newCell() {
-//  Serial.print("   "); 
-//}
-
-//void printData(float x, float y, float z, int optical_value) {
-//  Serial.print(x); newCell();
-//  Serial.print(y); newCell();
-//  Serial.print(z); newCell();
-//  
-//  Serial.println(optical_value);
-//}
 
 //Calculating the magnetic vector sum
 float calculateData(float x, float y, float z) {
@@ -61,33 +38,41 @@ float calculateData(float x, float y, float z) {
 void sendData(float x, float y, float z, int optical_value) {
   char msg[4];
   dtostrf(calculateData(x, y, z), 4, 4, msg);
+  msg[3] = 'm';
   sendMessage(msg);
   dtostrf(optical_value, 4, 4, msg);
+  msg[3] = 'd';
   sendMessage(msg);
 }
 
 void loop(void) 
 {
-  /* Get a new sensor event */ 
-  sensors_event_t event;
-  mag.getEvent(&event);
-  
   // Gets the X, Y, and Z component
-  float x = event.magnetic.x;
-  float y = event.magnetic.y;
-  float z = event.magnetic.z;
-  
-  int optical_value = 4800 / (analogRead(OPTICAL_PIN) - 20);
-  
-  //printData(x, y, z, optical_value);
-  
-  sendData(x, y, z, optical_value);
-  
-  delay(5 * 100);
+    int x, y, z;
+    setupMagnetometer();
+    TinyWireM.beginTransmission(MAG_ADDRESS);
+    TinyWireM.send(0x03);
+    TinyWireM.endTransmission();
+    
+    TinyWireM.requestFrom(MAG_ADDRESS, 6);
+    if (6 <= TinyWireM.available()) {
+      x = TinyWireM.receive() << 8;
+      x |= TinyWireM.receive(); 
+      y = TinyWireM.receive() << 8;
+      y |= TinyWireM.receive();
+      z = TinyWireM.receive() << 8;
+      z |= TinyWireM.receive();
+    }
+    int optical_value = 4800 / (analogRead(OPTICAL_PIN) - 20);
+    //int optical_value;
+    //optical_value = 100;
+    
+    sendData(x, y, z, optical_value);
 }
 
-void requestData() {
-  //TinyWireM.beginTransmission(SLAVE_ADDRESS);
-  
-  //TinyWireM.endTransmission();
+void setupMagnetometer() {
+  TinyWireM.beginTransmission(MAG_ADDRESS);
+  TinyWireM.send(0x02);
+  TinyWireM.send(0x00);
+  TinyWireM.endTransmission();
 }

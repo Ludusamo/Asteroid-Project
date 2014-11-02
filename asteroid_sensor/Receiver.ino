@@ -112,11 +112,6 @@ void setup() {
     vw_set_rx_pin(4);           // We will be receiving on pi n 4 i.e te RX pin from the module connects to this pin. 
     vw_rx_start();                      // Start the receiver 
     
-    // Debug Information
-    Serial.println("Program Start:");
-    Serial.println();
-    Serial.println("Magnitude of Vectors   Distance (cm)");
-    Serial.println();
     lastTime = millis();
     
     // Initializes the Chip Select
@@ -158,7 +153,6 @@ void loop() {
     lastTime = currentTime;
     Serial.println();
     nextRead = 0;
-    Serial.println("Logging");
     
     //Opens the file on the SD card
     File dataFile = SD.open("datalog", FILE_WRITE);
@@ -168,7 +162,8 @@ void loop() {
     distance = dis.substring(0,3);
     magnetic = magVecSum.substring(0, 3);
     
-    Serial.println(distance + " " + magnetic);
+    Serial.println("d" + distance);
+    Serial.println("m" + magnetic);
 
     // if the file is available, write to it:
 //    if (stof(distance) <= 30) {

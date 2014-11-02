@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="src" path="lib"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-openjdk-i386"/>
+	<classpathentry kind="lib" path="/home/brehor/Copy/Ludusamo/Programming/Java/Asteroid-Receiving-GUI/lib/ardulink.jar"/>
+	<classpathentry kind="lib" path="/home/brehor/Copy/Ludusamo/Programming/Java/Asteroid-Receiving-GUI/lib/RXTXcomm.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

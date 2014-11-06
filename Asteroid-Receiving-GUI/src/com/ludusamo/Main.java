@@ -25,6 +25,7 @@ public class Main extends JFrame implements SerialPortEventListener, Runnable {
 	final static int WIDTH = 1000;
 	final static int HEIGHT = 600;
 	private boolean programStatus;
+	int samplingRate;
 
 	private static final String PORT_NAMES[] = { "/dev/tty.usbserial-A9007UX1",
 			"/dev/ttyACM0", // Raspberry Pi
@@ -45,7 +46,6 @@ public class Main extends JFrame implements SerialPortEventListener, Runnable {
 
 	long lastTime;
 	int deltaT;
-	int elapsedTime;
 
 	public void initialize() {
 		// the next line is for Raspberry Pi and
@@ -153,13 +153,9 @@ public class Main extends JFrame implements SerialPortEventListener, Runnable {
 			deltaT = (int) (currentTime - lastTime);
 			lastTime = currentTime;
 
-			elapsedTime += deltaT;
-			if (elapsedTime >= 1000) {
-				mainContainer.updateLogic();
-				repaint();
-				
-				elapsedTime = 0;
-			}
+			mainContainer.updateLogic(deltaT);
+			repaint();
+			
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {

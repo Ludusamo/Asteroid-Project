@@ -90,6 +90,7 @@ public class NumberPanel extends JPanel {
 
 	public void setNumLabel(String num) {
 		labels[1].setText(num);
+		if (num == null) labels[1].setText("-2");
 	}
 
 	public float getValue() {

@@ -22,10 +22,11 @@ import com.ludusamo.util.Vector2f;
 
 public class MainComponent extends JPanel {
 
+	TitlePanel titlePanel;
 	NumberPanel MVSPanel, DPanel;
 	PicturePanel pPanel;
 	DataPanel dataPanel;
-	TablePanel chartPanel;
+	ChartPanel chartPanel;
 	ControlPanel controlPanel;
 
 	public static Font font;
@@ -33,11 +34,14 @@ public class MainComponent extends JPanel {
 
 	boolean collectingData;
 	private final float acceptableSlope = 0;
-	int timeElapsed = 0;
+	public int samplingRate, elapsed;
+	float timeElapsed = 0;
 	
 	public MainComponent() {
 		super(new GridBagLayout());
 
+		samplingRate = 500;
+		
 		loadFont("res/font.ttf");
 		try {
 			backgroundImg = ImageIO.read(new File("res/background.png"));
@@ -47,72 +51,82 @@ public class MainComponent extends JPanel {
 
 		setVisible(true);
 
-		String[] picURLS = { "res/check.png", "res/X.png", "res/unknown.png" };
+		String[] picURLS = { "res/check.png", "res/X.png", "res/unknown.png", "res/doge.jpg" };
 
 		collectingData = false;
 
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
 
+		// Title Display
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 16;
+		c.gridheight = 1;
+		c.weightx = 1;
+		c.weighty = 0.04;
+		titlePanel = new TitlePanel("Locating/Identifying Viable Asteroids");
+		add(titlePanel, c);
+		
 		// Magnetic Display
 		c.gridx = 0;
-		c.gridy = 22;
+		c.gridy = 23;
 		c.gridwidth = 3;
 		c.gridheight = 2;
 		c.weightx = 0.1875f;
-		c.weighty = 0.083f;
-		MVSPanel = new NumberPanel("Magnetic");
-		add(MVSPanel, c);
-
-		// Distance Display
-		c.gridx = 3;
-		c.gridy = 22;
-		c.gridwidth = 3;
-		c.gridheight = 2;
-		c.weightx = 0.1875f;
-		c.weighty = 0.083f;
+		c.weighty = 0.08f;
 		DPanel = new NumberPanel("Distance");
 		add(DPanel, c);
 
+		// Distance Display
+		c.gridx = 3;
+		c.gridy = 23;
+		c.gridwidth = 3;
+		c.gridheight = 2;
+		c.weightx = 0.1875f;
+		c.weighty = 0.08f;
+		MVSPanel = new NumberPanel("Magnetic");
+		add(MVSPanel, c);
+
 		// Picture Display
 		c.gridx = 6;
-		c.gridy = 0;
+		c.gridy = 1;
 		c.gridwidth = 10;
 		c.gridheight = 22;
 		c.weightx = 0.625f;
-		c.weighty = 0.916f;
+		c.weighty = 0.88f;
 		pPanel = new PicturePanel(picURLS);
 		add(pPanel, c);
 		pPanel.setPicture(2);
 
-		// Graph Display
+		// Data Display
 		c.gridx = 0;
-		c.gridy = 11;
+		c.gridy = 12;
 		c.gridwidth = 6;
 		c.gridheight = 11;
 		c.weightx = 0.375f;
-		c.weighty = 0.4583f;
+		c.weighty = 0.44f;
 		dataPanel = new DataPanel();
 		add(dataPanel, c);
 
 		// Chart Display
 		c.gridx = 0;
-		c.gridy = 0;
+		c.gridy = 1;
 		c.gridwidth = 6;
 		c.gridheight = 11;
 		c.weightx = 0.375f;
-		c.weighty = 0.4583f;
-		chartPanel = new TablePanel(
-				new String[] { "Magnetic Vector Sum", "Distance" });
+		c.weighty = 0.44f;
+		chartPanel = new ChartPanel(
+				new String[] { "Distance", "Magnetic" });
 		add(chartPanel, c);
 
 		// Control Display
 		c.gridx = 6;
-		c.gridy = 22;
+		c.gridy = 23;
 		c.gridwidth = 10;
 		c.gridheight = 2;
 		c.weightx = 0.625f;
-		c.weighty = 0.083f;
+		c.weighty = 0.08f;
 		controlPanel = new ControlPanel(this);
 		add(controlPanel, c);
 		validate();
@@ -120,6 +134,8 @@ public class MainComponent extends JPanel {
 		DPanel.setMinimumDimension();
 		MVSPanel.setMinimumDimension();
 		dataPanel.setMinimumDimension();
+		controlPanel.setMinimumDimension();
+		titlePanel.setMinimumDimension();
 
 		this.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
@@ -145,21 +161,22 @@ public class MainComponent extends JPanel {
 		}
 	}
 
-	public void updateLogic() {
+	public void updateLogic(int deltaT) {
+		elapsed += deltaT;
 		dataPanel.update(collectingData, getSlope(), timeElapsed, chartPanel.getPoints().size());
-		if (collectingData) {
-			timeElapsed++;
+		if (collectingData && elapsed >= samplingRate) {
+			timeElapsed += (float)(samplingRate / 1000f);
 			collectData();
-		}
-		if (!collectingData) {
-			MVSPanel.setNumLabel("-");
-			DPanel.setNumLabel("-");
+			elapsed = 0;
 		}
 	}
 
 	private void collectData() {
-		if (MVSPanel.getValue() != -1 && DPanel.getValue() != -1)
-			chartPanel.addValue(MVSPanel.getValue(), DPanel.getValue());
+		if (MVSPanel.getValue() != -1 && DPanel.getValue() != -1 && DPanel.getValue() <= 30f)
+			chartPanel.addValue(DPanel.getValue(), MVSPanel.getValue());
+		if (DPanel.getValue() < 10f && DPanel.getValue() != -1) {
+			stopCollectingData();
+		}
 	}
 
 	public void newData(String data) {
@@ -177,12 +194,14 @@ public class MainComponent extends JPanel {
 	}
 
 	public void startCollectingData() {
+		clearNumPanels();
 		collectingData = true;
 		chartPanel.reset();
 		timeElapsed = 0;
 	}
 
 	public void stopCollectingData() {
+		clearNumPanels();
 		collectingData = false;
 	}
 
@@ -215,6 +234,30 @@ public class MainComponent extends JPanel {
 	
 	public void resize() {
 		chartPanel.resize();
-		controlPanel.resize();
+	}
+	
+	public void clearNumPanels() {
+		MVSPanel.setNumLabel("-");
+		DPanel.setNumLabel("-");
+	}
+	
+	public NumberPanel getMVSPanel() {
+		return MVSPanel;
+	}
+	
+	public NumberPanel getDPanel() {
+		return DPanel;
+	}
+	
+	public PicturePanel getPicturePanel() {
+		return pPanel;
+	}
+	
+	public ChartPanel getChartPanel() {
+		return chartPanel;
+	}
+	
+	public DataPanel getDataPanel() {
+		return dataPanel;
 	}
 }

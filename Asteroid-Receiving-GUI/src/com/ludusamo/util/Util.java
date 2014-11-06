@@ -3,6 +3,13 @@ package com.ludusamo.util;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+
+import com.ludusamo.component.DataPanel;
+import com.ludusamo.component.ChartPanel;
 
 public class Util {
 	public static void drawBackground(Component c, BufferedImage bg, Graphics g) {
@@ -28,5 +35,26 @@ public class Util {
 	
 	public static void drawTitle(Component c, BufferedImage title, Graphics g) {
 		g.drawImage(title, 0, 0, null);
+	}
+	
+	public static void saveData(String fileName, ChartPanel table, DataPanel data) {
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("data/" + fileName, "UTF-8");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ArrayList<Vector2f> points = table.getPoints();
+		writer.println(data.getTimeElapsed());
+		writer.println(data.getSlope());
+		writer.println(data.getNumDataPoints());
+		for (int i = 0; i < points.size(); i++) {
+			writer.println((i + 1) + ": {" + points.get(i).x  + ", " + points.get(i).y + "}");
+		}
+		writer.close();
 	}
 }

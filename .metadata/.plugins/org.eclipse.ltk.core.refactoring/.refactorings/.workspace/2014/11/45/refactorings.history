@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;Asteroid-Receiving-GUI&apos;" deleteContents="false" description="Delete resource &apos;Asteroid-Receiving-GUI&apos;" element1="/Asteroid-Receiving-GUI" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1415209262502"/>
+</session>

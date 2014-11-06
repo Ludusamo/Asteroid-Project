@@ -26,8 +26,6 @@ public class DataPanel extends JPanel {
 	JLabel[] labels;
 
 	BufferedImage title;
-	
-	Graphics g;
 
 	private void changeFontSize(JLabel l, int size) {
 		Font f = l.getFont();
@@ -35,10 +33,6 @@ public class DataPanel extends JPanel {
 	}
 
 	protected void adaptLabelFont(JLabel l) {
-		if (g == null) {
-			// System.out.println("Not working.");
-			return;
-		}
 
 		float newSize = (minimumDimension.width / getSize().width)
 				* (MAX_FONT_SIZE - MIN_FONT_SIZE);
@@ -56,7 +50,6 @@ public class DataPanel extends JPanel {
 		labels = new JLabel[4];
 		for (int i = 0; i < labels.length; i++) {
 			c.anchor = GridBagConstraints.WEST;
-			c.ipadx = 150;
 			c.weightx = .7f;
 			c.gridwidth = 4;
 			c.gridheight = 1;
@@ -92,7 +85,7 @@ public class DataPanel extends JPanel {
 	}
 
 	public void update(boolean collectingData, float currentSlope,
-			int timeElapsed, int numData) {
+			float timeElapsed, int numData) {
 		labels[0].setText(" Collecting Data: "
 				+ (collectingData ? "Yes" : "No"));
 		labels[1].setText(" Time Elapsed: " + timeElapsed + "s");
@@ -107,9 +100,20 @@ public class DataPanel extends JPanel {
 	@SuppressWarnings("deprecation")
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		this.g = g;
 
 		Util.drawBackground(this, MainComponent.backgroundImg, g);
 		Util.drawTitle(this, title, g);
+	}
+	
+	public String getTimeElapsed() {
+		return labels[1].getText();
+	}
+	
+	public String getSlope() {
+		return labels[2].getText();
+	}
+	
+	public String getNumDataPoints() {
+		return labels[3].getText();
 	}
 }

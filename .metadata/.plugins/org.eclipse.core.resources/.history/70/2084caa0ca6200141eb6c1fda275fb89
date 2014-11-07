@@ -1,0 +1,5 @@
+package com.ludusamo.component;
+
+public class TitlePanel extends JPanel{
+
+}

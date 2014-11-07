@@ -16,7 +16,7 @@
 <coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="130" y="24"/>
 <coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="74" y="24"/>
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="74" y="24"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="106" y="24"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="58" y="24"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.debug.ui.launch.toolbar" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -26,7 +26,7 @@
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -35,16 +35,10 @@
 <editorArea activeWorkbook="DefaultEditorWorkbook">
 <info part="DefaultEditorWorkbook">
 <folder appearance="1" expanded="2">
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-</presentation>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="/home/brehor/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/Main.java" title="Main.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/Main.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Asteroid-Receiving-GUI/src/com/ludusamo/Main.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="831" selectionTopPixel="326"/>
-</editor>
 </editors>
 <views>
 <view id="org.eclipse.ui.navigator.ProjectExplorer" partName="Project Explorer">
@@ -52,9 +46,6 @@
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Warnings (26 items)"/>
-</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="105" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.resourceField="105" org.eclipse.ui.ide.severityAndDescriptionField="1151"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -117,7 +108,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.ui.console.ConsoleView" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.ui.internal.ide.application.ResourcePerspective" id="org.eclipse.ui.resourcePerspective" label="Resource"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -302,151 +293,7 @@
 </perspective>
 </perspectives>
 <workingSets/>
-<navigationHistory>
-<editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/util/CommandInterpreter.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-trial2.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/steel-trial1.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/steel-trial3.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/steel-trialLivaTable2.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/steel-trialTextBook1.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/steel-trialLivaTable1.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-trialTextBook2.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-trial5.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-trialTextBook1.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-trialTextBook2.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-trial1.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-trial2.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-trial3.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-trial4.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-trial5.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-trialTextBook1.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-trialTextBook2.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/steel-trial1.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/steel-trial2.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/steel-trial3.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/steel-trialLivaTable1.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/steel-10-4.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" path="/Asteroid-Receiving-GUI/data/aluminum-10-4.dat"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/util/CommandInterpreter.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/Main.java"/>
-</editors>
-<item historyLabel="MainComponent.java" index="0">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MainComponent.java" index="0">
-<position info="not_deleted" x="4602" y="0"/>
-</item>
-<item historyLabel="CommandInterpreter.java" index="1">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MainComponent.java" index="0">
-<position info="not_deleted" x="4494" y="0"/>
-</item>
-<item historyLabel="CommandInterpreter.java" index="1">
-<position info="not_deleted" x="833" y="0"/>
-</item>
-<item historyLabel="aluminum-trial2.dat" index="2">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="steel-trial1.dat" index="3">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="steel-trial3.dat" index="4">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="steel-trialLivaTable2.dat" index="5">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="steel-trialTextBook1.dat" index="6">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="steel-trialLivaTable1.dat" index="7">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="aluminum-trialTextBook2.dat" index="8">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="aluminum-trial5.dat" index="9">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="CommandInterpreter.java" index="1">
-<position info="not_deleted" x="833" y="0"/>
-</item>
-<item historyLabel="aluminum-trialTextBook1.dat" index="10">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="aluminum-trialTextBook2.dat" index="11">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MainComponent.java" index="12">
-<position info="not_deleted" x="4494" y="0"/>
-</item>
-<item historyLabel="MainComponent.java" index="12">
-<position info="not_deleted" x="4045" y="0"/>
-</item>
-<item historyLabel="aluminum-trial1.dat" index="13">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="aluminum-trial2.dat" index="14">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="aluminum-trial3.dat" index="15">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="aluminum-trial4.dat" index="16">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="aluminum-trial5.dat" index="17">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="aluminum-trialTextBook1.dat" index="18">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="aluminum-trialTextBook2.dat" index="19">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="steel-trial1.dat" index="20">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="steel-trial2.dat" index="21">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="steel-trial3.dat" index="22">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="steel-trialLivaTable1.dat" index="23">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="steel-trial3.dat" index="22">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="steel-10-4.dat" index="24">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="aluminum-10-4.dat" index="25">
-<position info="not_deleted" x="92" y="0"/>
-</item>
-<item historyLabel="steel-10-4.dat" index="24">
-<position info="not_deleted" x="425" y="0"/>
-</item>
-<item historyLabel="aluminum-10-4.dat" index="25">
-<position info="not_deleted" x="92" y="0"/>
-</item>
-<item historyLabel="steel-10-4.dat" index="24">
-<position info="not_deleted" x="47" y="270"/>
-</item>
-<item historyLabel="MainComponent.java" index="26">
-<position info="not_deleted" x="1158" y="0"/>
-</item>
-<item historyLabel="CommandInterpreter.java" index="27"/>
-<item active="true" historyLabel="Main.java" index="28">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-</navigationHistory>
+<navigationHistory/>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
 <workbenchWindowAdvisor/>
@@ -463,6 +310,15 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ChartPanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/ChartPanel.java">
+<persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/ChartPanel.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="NumberPanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/NumberPanel.java">
+<persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/NumberPanel.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainComponent.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java">
+<persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/Main.java">
 <persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/Main.java"/>
 </file>
@@ -498,15 +354,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="aluminum-trial3.dat" tooltip="Asteroid-Receiving-GUI/data/aluminum-trial3.dat">
 <persistable path="/Asteroid-Receiving-GUI/data/aluminum-trial3.dat"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="aluminum-trial2.dat" tooltip="Asteroid-Receiving-GUI/data/aluminum-trial2.dat">
-<persistable path="/Asteroid-Receiving-GUI/data/aluminum-trial2.dat"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="aluminum-trial1.dat" tooltip="Asteroid-Receiving-GUI/data/aluminum-trial1.dat">
-<persistable path="/Asteroid-Receiving-GUI/data/aluminum-trial1.dat"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="steel-trialTextBook1.dat" tooltip="Asteroid-Receiving-GUI/data/steel-trialTextBook1.dat">
-<persistable path="/Asteroid-Receiving-GUI/data/steel-trialTextBook1.dat"/>
 </file>
 </mruList>
 </workbench>

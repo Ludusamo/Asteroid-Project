@@ -53,10 +53,10 @@ dtostrf(floatVar, minStringWidthIncDecimalPoint, numVarsAfterDecimal, charBuf); 
 void sendData(float x, float y, float z, int optical_value) {
   char msg[10];
   dtostrf(calculateData(x, y, z), 4, 4, msg);
-  msg[3] = 'm';
+  msg[9] = 'm';
   sendMessage(msg);
   dtostrf(optical_value, 4, 4, msg);
-  msg[3] = 'd';
+  msg[9] = 'd';
   sendMessage(msg);
 }
 

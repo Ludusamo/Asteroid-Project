@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename field &apos;underTen&apos; in &apos;com.ludusamo.component.MainComponent&apos; to &apos;trialInProgress&apos;&#x0A;- Original project: &apos;Asteroid-Receiving-GUI&apos;&#x0A;- Original element: &apos;com.ludusamo.component.MainComponent.underTen&apos;&#x0A;- Renamed element: &apos;com.ludusamo.component.MainComponent.trialInProgress&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;underTen&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src&lt;com.ludusamo.component{MainComponent.java[MainComponent^underTen" name="trialInProgress" references="true" setter="false" stamp="1415632749953" textual="false" version="1.0"/>
+</session>

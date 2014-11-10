@@ -1,0 +1,62 @@
+package com.ludusamo.util;
+
+import java.util.StringTokenizer;
+
+import javax.swing.JLabel;
+
+import com.ludusamo.component.MainComponent;
+
+public class CommandInterpreter {
+	MainComponent mc;
+	JLabel outputLabel;
+	String[] args;
+
+	public CommandInterpreter(MainComponent mc, JLabel outputLabel) {
+		this.mc = mc;
+		this.outputLabel = outputLabel;
+		args = new String[3];
+	}
+
+	public void processInput(String input) {
+		StringTokenizer st = new StringTokenizer(input);
+		for (int i = 0; i < 3; i++) {
+			if (st.hasMoreTokens())
+				args[i] = st.nextToken();
+		}
+		if (args[0].charAt(0) == '/') {
+			processCommand(args[0].substring(1));
+		}
+	}
+
+	private void processCommand(String cmd) {
+		if (cmd.equals("start")) {
+			mc.startCollectingData();
+			mc.getPicturePanel().setPicture(2);
+			outputLabel.setText("Starting Data Collection");
+			mc.startTrial();
+		}
+		if (cmd.equals("stop")) {
+			mc.stopCollectingData();
+			outputLabel.setText("Stop Data Collection");
+		}
+		if (cmd.equals("resume")) {
+			mc.continueCollectingData();
+			outputLabel.setText("Continuing Data Collection");
+		}
+		if (cmd.equals("setSamplingRate")) {
+			mc.samplingRate = Integer.parseInt(args[1]);
+			outputLabel.setText("Sampling Rate: " + args[1]);
+		}
+		if (cmd.equals("saveData")) {
+			Util.saveData(args[1], mc.getChartPanel(), mc.getDataPanel());
+			outputLabel.setText("Data saved to: " + args[1]);
+		}
+		if (cmd.equals("doge")) {
+			mc.stopCollectingData();
+			mc.getPicturePanel().setPicture(3);
+			mc.getDPanel().setNumLabel("Much Distance");
+			mc.getMVSPanel().setNumLabel("Such Magnetic");
+			outputLabel.setText("#doge");
+		}
+	}
+}

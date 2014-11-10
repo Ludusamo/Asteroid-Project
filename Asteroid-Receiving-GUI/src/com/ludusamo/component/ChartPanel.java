@@ -70,10 +70,10 @@ public class ChartPanel extends JPanel {
 		}
 	}
 
-	public void addValue(float d, float mvs) {
+	public void addValue(float t, float mvs) {
 		model = (DefaultTableModel) dataTable.getModel();
-		model.addRow(new Object[] { d, mvs });
-		points.add(new Vector2f(d, mvs));
+		model.addRow(new Object[] { t, mvs });
+		points.add(new Vector2f(t, mvs));
 	}
 
 	public void reset() {

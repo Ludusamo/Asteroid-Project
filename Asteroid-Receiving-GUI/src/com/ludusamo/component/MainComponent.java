@@ -32,8 +32,8 @@ public class MainComponent extends JPanel {
 	public static Font font;
 	public static BufferedImage backgroundImg;
 
-	boolean collectingData;
-	private final float acceptableSlope = 0;
+	boolean collectingData, trialInProgress;
+	private final float slopeCutoff = 0, collectionTime = 10f;
 	public int samplingRate, elapsed;
 	float timeElapsed = 0;
 	
@@ -117,7 +117,7 @@ public class MainComponent extends JPanel {
 		c.weightx = 0.375f;
 		c.weighty = 0.44f;
 		chartPanel = new ChartPanel(
-				new String[] { "Distance", "Magnetic" });
+				new String[] { "Time", "Magnetic" });
 		add(chartPanel, c);
 
 		// Control Display
@@ -162,25 +162,29 @@ public class MainComponent extends JPanel {
 	}
 
 	public void updateLogic(int deltaT) {
+		if (DPanel.getValue() < 10f && DPanel.getValue() != -1 && trialInProgress && !collectingData) {
+			startCollectingData();
+		}
 		elapsed += deltaT;
 		dataPanel.update(collectingData, getSlope(), timeElapsed, chartPanel.getPoints().size());
 		if (collectingData && elapsed >= samplingRate) {
 			timeElapsed += (float)(samplingRate / 1000f);
 			collectData();
 			elapsed = 0;
+			if (timeElapsed >= collectionTime) {
+				System.out.println("Stopping");
+				stopCollectingData();
+			}
 		}
 	}
 
 	private void collectData() {
-		if (MVSPanel.getValue() != -1 && DPanel.getValue() != -1 && DPanel.getValue() <= 30f)
-			chartPanel.addValue(DPanel.getValue(), MVSPanel.getValue());
-		if (DPanel.getValue() < 10f && DPanel.getValue() != -1) {
-			stopCollectingData();
-		}
+		if (MVSPanel.getValue() != -1)
+			chartPanel.addValue(timeElapsed, MVSPanel.getValue());
 	}
 
 	public void newData(String data) {
-		if (collectingData) {
+		if (trialInProgress) {
 			String output = data.substring(1);
 			switch (data.charAt(0)) {
 			case 'd':
@@ -203,6 +207,7 @@ public class MainComponent extends JPanel {
 	public void stopCollectingData() {
 		clearNumPanels();
 		collectingData = false;
+		trialInProgress = false;
 	}
 
 	public void continueCollectingData() {
@@ -230,6 +235,8 @@ public class MainComponent extends JPanel {
 	
 	public void evaluateData() {
 		float currentSlope = getSlope();
+		
+		pPanel.setPicture((Math.abs(currentSlope) >= slopeCutoff) ? 0 : 1);
 	}
 	
 	public void resize() {
@@ -239,6 +246,10 @@ public class MainComponent extends JPanel {
 	public void clearNumPanels() {
 		MVSPanel.setNumLabel("-");
 		DPanel.setNumLabel("-");
+	}
+
+	public void startTrial() {
+		trialInProgress = true;
 	}
 	
 	public NumberPanel getMVSPanel() {

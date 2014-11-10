@@ -30,7 +30,7 @@ public class CommandInterpreter {
 
 	private void processCommand(String cmd) {
 		if (cmd.equals("start")) {
-			mc.startCollectingData();
+			mc.startTrial();
 			mc.getPicturePanel().setPicture(2);
 			outputLabel.setText("Starting Data Collection");
 		}
@@ -49,6 +49,10 @@ public class CommandInterpreter {
 		if (cmd.equals("saveData")) {
 			Util.saveData(args[1], mc.getChartPanel(), mc.getDataPanel());
 			outputLabel.setText("Data saved to: " + args[1]);
+		}
+		if (cmd.equals("checkData")) {
+			mc.evaluateData();
+			outputLabel.setText("Evaluating Data...");
 		}
 		if (cmd.equals("doge")) {
 			mc.stopCollectingData();

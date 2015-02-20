@@ -10,18 +10,18 @@ Adafruit_HMC5883_Unified mag = Adafruit_HMC5883_Unified(12345);
 
 // Pin for Analog Optical Pin Read
 #define OPTICAL_PIN A3
+#define TX_LINK_PIN 8
 
 // Initiate Transmitter function
 void initializeTransmitter() {
   vw_set_ptt_inverted(true); // Required for RF Link module
   vw_setup(2000);                 // Bits per sec
-  vw_set_tx_pin(8);                // pin 3 is used as the transmit data out into the TX Link module, change this as per your needs 
+  vw_set_tx_pin(TX_LINK_PIN);                // pin 3 is used as the transmit data out into the TX Link module, change this as per your needs 
 }
 
 // Function for sending messages
 void sendMessage(const char* msg) {
   if (vw_send((uint8_t *)msg, strlen(msg))) Serial.println(msg);
-  else Serial.println("I am not sending because I am mad."); 
   vw_wait_tx();                                          // Wait for message to finish
 }
 

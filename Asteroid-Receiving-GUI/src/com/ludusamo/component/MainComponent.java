@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import com.ludusamo.Main;
 import com.ludusamo.util.Vector2f;
 
 public class MainComponent extends JPanel {
@@ -32,16 +33,23 @@ public class MainComponent extends JPanel {
 	public static Font font;
 	public static BufferedImage backgroundImg;
 
+	private Main main;
+
+	public boolean hasPort = false;
+	
 	boolean collectingData, trialInProgress;
-	private final float slopeCutoff = 0, collectionTime = 10f;
+	private final float slopeCutoff = 1f, collectionTime = 10f;
 	public int samplingRate, elapsed;
 	float timeElapsed = 0;
-	
-	public MainComponent() {
+
+	public MainComponent(Main main) {
 		super(new GridBagLayout());
 
+		this.main = main;
+		hasPort = main.findPort();
+
 		samplingRate = 500;
-		
+
 		loadFont("res/font.ttf");
 		try {
 			backgroundImg = ImageIO.read(new File("res/background.png"));
@@ -51,7 +59,8 @@ public class MainComponent extends JPanel {
 
 		setVisible(true);
 
-		String[] picURLS = { "res/check.png", "res/X.png", "res/unknown.png", "res/doge.jpg" };
+		String[] picURLS = { "res/check.png", "res/X.png", "res/unknown.png",
+				"res/doge.jpg", "res/flag.jpg" };
 
 		collectingData = false;
 
@@ -67,7 +76,7 @@ public class MainComponent extends JPanel {
 		c.weighty = 0.04;
 		titlePanel = new TitlePanel("Locating/Identifying Viable Asteroids");
 		add(titlePanel, c);
-		
+
 		// Magnetic Display
 		c.gridx = 0;
 		c.gridy = 23;
@@ -116,8 +125,7 @@ public class MainComponent extends JPanel {
 		c.gridheight = 11;
 		c.weightx = 0.375f;
 		c.weighty = 0.44f;
-		chartPanel = new ChartPanel(
-				new String[] { "Time", "Magnetic" });
+		chartPanel = new ChartPanel(new String[] { "Time", "Magnetic" });
 		add(chartPanel, c);
 
 		// Control Display
@@ -149,7 +157,6 @@ public class MainComponent extends JPanel {
 		try {
 			is = new BufferedInputStream(new FileInputStream(fontPath));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
@@ -162,13 +169,15 @@ public class MainComponent extends JPanel {
 	}
 
 	public void updateLogic(int deltaT) {
-		if (DPanel.getValue() < 10f && DPanel.getValue() != -1 && trialInProgress && !collectingData) {
+		if (DPanel.getValue() < 10f && DPanel.getValue() != -1
+				&& trialInProgress && !collectingData) {
 			startCollectingData();
 		}
 		elapsed += deltaT;
-		dataPanel.update(collectingData, getSlope(), timeElapsed, chartPanel.getPoints().size());
+		dataPanel.update(collectingData, getSlope(), timeElapsed, chartPanel
+				.getPoints().size());
 		if (collectingData && elapsed >= samplingRate) {
-			timeElapsed += (float)(samplingRate / 1000f);
+			timeElapsed += (float) (samplingRate / 1000f);
 			collectData();
 			elapsed = 0;
 			if (timeElapsed >= collectionTime) {
@@ -217,7 +226,6 @@ public class MainComponent extends JPanel {
 	public float getSlope() {
 		ArrayList<Vector2f> points = chartPanel.getPoints();
 
-		float numSlopes = 0;
 		float numerator = 0, denominator = 0;
 		float slope = 0;
 		for (int i = 0; i < points.size(); i++) {
@@ -229,20 +237,24 @@ public class MainComponent extends JPanel {
 			}
 		}
 		slope = numerator / denominator;
-		
+
 		return slope;
 	}
-	
+
 	public void evaluateData() {
 		float currentSlope = getSlope();
-		
-		pPanel.setPicture((Math.abs(currentSlope) >= slopeCutoff) ? 0 : 1);
+
+		pPanel.setPicture((Math.abs(currentSlope) >= slopeCutoff) ? 1 : 0);
 	}
-	
+
+	public void checkComm() {
+		hasPort = main.findPort();
+	}
+
 	public void resize() {
 		chartPanel.resize();
 	}
-	
+
 	public void clearNumPanels() {
 		MVSPanel.setNumLabel("-");
 		DPanel.setNumLabel("-");
@@ -251,23 +263,23 @@ public class MainComponent extends JPanel {
 	public void startTrial() {
 		trialInProgress = true;
 	}
-	
+
 	public NumberPanel getMVSPanel() {
 		return MVSPanel;
 	}
-	
+
 	public NumberPanel getDPanel() {
 		return DPanel;
 	}
-	
+
 	public PicturePanel getPicturePanel() {
 		return pPanel;
 	}
-	
+
 	public ChartPanel getChartPanel() {
 		return chartPanel;
 	}
-	
+
 	public DataPanel getDataPanel() {
 		return dataPanel;
 	}

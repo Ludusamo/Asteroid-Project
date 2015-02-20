@@ -76,7 +76,6 @@ public class NumberPanel extends JPanel {
 		});
 	}
 
-	@SuppressWarnings("deprecation")
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		this.g = g;

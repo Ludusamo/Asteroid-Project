@@ -4,14 +4,14 @@
 	<classpathentry kind="src" path="res"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-openjdk-i386"/>
-	<classpathentry kind="lib" path="/home/brehor/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/LINUX_lib/ardulink.jar">
+	<classpathentry kind="lib" path="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/LINUX_lib/ardulink.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/home/brehor/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/LINUX_lib"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/LINUX_lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/brehor/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/LINUX_lib/RXTXcomm.jar">
+	<classpathentry kind="lib" path="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/LINUX_lib/RXTXcomm.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/home/brehor/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/LINUX_lib"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/LINUX_lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>

@@ -6,7 +6,6 @@ import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -32,31 +31,21 @@ public class Main extends JFrame implements SerialPortEventListener, Runnable {
 			"/dev/ttyUSB0", // Linux
 			"COM3", // Windows
 	};
-	/**
-	 * A BufferedReader which will be fed by a InputStreamReader converting the
-	 * bytes into characters making the displayed results codepage independent
-	 */
+	
 	private BufferedReader input;
-	/** The output stream to the port */
+	// The output stream to the port
 	private OutputStream output;
-	/** Milliseconds to block while waiting for port open */
+	// Milliseconds to block while waiting for port open
 	private static final int TIME_OUT = 2000;
-	/** Default bits per second for COM port. */
+	// Default bits per second for COM port.
 	private static final int DATA_RATE = 9600;
 
 	long lastTime;
 	int deltaT;
 
-	public void initialize() {
-		// the next line is for Raspberry Pi and
-		// gets us into the while loop and was suggested here was suggested
-		// http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
-		System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
-
+	public boolean findPort() {
 		CommPortIdentifier portId = null;
 		Enumeration portEnum = CommPortIdentifier.getPortIdentifiers();
-
-		// First, Find an instance of serial port as set in PORT_NAMES.
 		while (portEnum.hasMoreElements()) {
 			CommPortIdentifier currPortId = (CommPortIdentifier) portEnum
 					.nextElement();
@@ -69,7 +58,7 @@ public class Main extends JFrame implements SerialPortEventListener, Runnable {
 		}
 		if (portId == null) {
 			System.out.println("Could not find COM port.");
-			return;
+			return false;
 		}
 
 		try {
@@ -92,12 +81,16 @@ public class Main extends JFrame implements SerialPortEventListener, Runnable {
 		} catch (Exception e) {
 			System.err.println(e.toString());
 		}
+		return true;
 	}
 
-	/**
-	 * This should be called when you stop using the port. This will prevent
-	 * port locking on platforms like Linux.
-	 */
+	public void initialize() {
+		// the next line is for Raspberry Pi and
+		// gets us into the while loop and was suggested here was suggested
+		// http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
+		System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
+	}
+
 	public synchronized void close() {
 		if (serialPort != null) {
 			serialPort.removeEventListener();
@@ -127,10 +120,10 @@ public class Main extends JFrame implements SerialPortEventListener, Runnable {
 		setSize(WIDTH, HEIGHT);
 		setMinimumSize(new Dimension(WIDTH, HEIGHT));
 		setMaximumSize(new Dimension(1920, 1080));
-		
-		setTitle("Project");
 
-		mainContainer = new MainComponent();
+		setTitle("Project LIVA");
+
+		mainContainer = new MainComponent(this);
 		add(mainContainer);
 		validate();
 	}
@@ -146,7 +139,7 @@ public class Main extends JFrame implements SerialPortEventListener, Runnable {
 	public void run() {
 		programStatus = true;
 		lastTime = System.currentTimeMillis();
-		
+
 		setVisible(true);
 		while (programStatus) {
 			long currentTime = System.currentTimeMillis();
@@ -155,11 +148,10 @@ public class Main extends JFrame implements SerialPortEventListener, Runnable {
 
 			mainContainer.updateLogic(deltaT);
 			repaint();
-			
+
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

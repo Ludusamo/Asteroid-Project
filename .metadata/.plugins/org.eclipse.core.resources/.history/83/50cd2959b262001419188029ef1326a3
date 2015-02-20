@@ -1,0 +1,61 @@
+package com.ludusamo.component;
+
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import com.ludusamo.util.CommandInterpreter;
+import com.ludusamo.util.Util;
+
+public class ControlPanel extends JPanel {
+	JTextField commandLine;
+	CommandInterpreter comInt;
+	JLabel outputText;
+	
+	private static final String ALERT = "ATTENTION: Continuing will clear all data up to this point.";
+
+	MainComponent mainC;
+
+	Graphics g;
+
+	public ControlPanel(MainComponent mainC) {
+		this.mainC = mainC;
+		addCommandLine();
+		setLayout(new GridBagLayout());
+		validate();
+	}
+
+	private void addCommandLine() {
+		commandLine = new JTextField(10);
+		commandLine.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comInt.processInput(commandLine.getText());
+				commandLine.setText("");
+			}
+		});
+
+		// start.set
+		GridBagConstraints c = new GridBagConstraints();
+		add(commandLine);
+	}
+
+	public void resize() {
+
+	}
+
+	@SuppressWarnings("deprecation")
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		BufferedImage bg = MainComponent.backgroundImg;
+		this.g = g;
+
+		Util.drawBackground(this, MainComponent.backgroundImg, g);
+	}
+}

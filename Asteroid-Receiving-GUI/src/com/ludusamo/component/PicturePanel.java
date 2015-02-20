@@ -13,6 +13,7 @@ import com.ludusamo.util.Util;
 public class PicturePanel extends JPanel {
 	private BufferedImage[] images = new BufferedImage[10];
 	private int currentImage;
+	private final int border_size = 52;
 
 	public PicturePanel(String[] imagesPaths) {
 		currentImage = 0;
@@ -34,6 +35,6 @@ public class PicturePanel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Util.drawBackground(this, MainComponent.backgroundImg, g);
-		g.drawImage(images[currentImage], 26, 26, this.getWidth() - 52, this.getHeight() - 52, null);
+		g.drawImage(images[currentImage], border_size / 2, border_size / 2, this.getWidth() - border_size, this.getHeight() - border_size, null);
 	}
 }

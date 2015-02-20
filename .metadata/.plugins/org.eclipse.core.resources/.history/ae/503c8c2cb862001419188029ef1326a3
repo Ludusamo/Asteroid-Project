@@ -1,0 +1,227 @@
+package com.ludusamo.component;
+
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
+import com.ludusamo.util.Vector2f;
+
+public class MainComponent extends JPanel {
+
+	NumberPanel MVSPanel, DPanel;
+	PicturePanel pPanel;
+	DataPanel dataPanel;
+	TablePanel chartPanel;
+	ControlPanel controlPanel;
+
+	public static Font font;
+	public static BufferedImage backgroundImg;
+
+	boolean collectingData;
+	private final float acceptableSlope = 0;
+	int timeElapsed, samplingRate, elapsed;
+	
+	public MainComponent() {
+		super(new GridBagLayout());
+
+		samplingRate = 500;
+		
+		loadFont("res/font.ttf");
+		try {
+			backgroundImg = ImageIO.read(new File("res/background.png"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		setVisible(true);
+
+		String[] picURLS = { "res/check.png", "res/X.png", "res/unknown.png" };
+
+		collectingData = false;
+
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
+
+		// Magnetic Display
+		c.gridx = 0;
+		c.gridy = 22;
+		c.gridwidth = 3;
+		c.gridheight = 2;
+		c.weightx = 0.1875f;
+		c.weighty = 0.083f;
+		MVSPanel = new NumberPanel("Magnetic");
+		add(MVSPanel, c);
+
+		// Distance Display
+		c.gridx = 3;
+		c.gridy = 22;
+		c.gridwidth = 3;
+		c.gridheight = 2;
+		c.weightx = 0.1875f;
+		c.weighty = 0.083f;
+		DPanel = new NumberPanel("Distance");
+		add(DPanel, c);
+
+		// Picture Display
+		c.gridx = 6;
+		c.gridy = 0;
+		c.gridwidth = 10;
+		c.gridheight = 22;
+		c.weightx = 0.625f;
+		c.weighty = 0.916f;
+		pPanel = new PicturePanel(picURLS);
+		add(pPanel, c);
+		pPanel.setPicture(2);
+
+		// Graph Display
+		c.gridx = 0;
+		c.gridy = 11;
+		c.gridwidth = 6;
+		c.gridheight = 11;
+		c.weightx = 0.375f;
+		c.weighty = 0.4583f;
+		dataPanel = new DataPanel();
+		add(dataPanel, c);
+
+		// Chart Display
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridwidth = 6;
+		c.gridheight = 11;
+		c.weightx = 0.375f;
+		c.weighty = 0.4583f;
+		chartPanel = new TablePanel(
+				new String[] { "Magnetic Vector Sum", "Distance" });
+		add(chartPanel, c);
+
+		// Control Display
+		c.gridx = 6;
+		c.gridy = 22;
+		c.gridwidth = 10;
+		c.gridheight = 2;
+		c.weightx = 0.625f;
+		c.weighty = 0.083f;
+		controlPanel = new ControlPanel(this);
+		add(controlPanel, c);
+		validate();
+
+		DPanel.setMinimumDimension();
+		MVSPanel.setMinimumDimension();
+		dataPanel.setMinimumDimension();
+		controlPanel.setMinimumDimension();
+
+		this.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				resize();
+			}
+		});
+	}
+
+	void loadFont(String fontPath) {
+		InputStream is = null;
+		try {
+			is = new BufferedInputStream(new FileInputStream(fontPath));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.font = Font.createFont(Font.TRUETYPE_FONT, is);
+		} catch (FontFormatException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	public void updateLogic(int deltaT) {
+		elapsed += deltaT;
+		dataPanel.update(collectingData, getSlope(), timeElapsed, chartPanel.getPoints().size());
+		if (collectingData && elapsed > samplingRate) {
+			timeElapsed++;
+			collectData();
+			elapsed = 0;
+		}
+		if (!collectingData) {
+			MVSPanel.setNumLabel("-");
+			DPanel.setNumLabel("-");
+		}
+	}
+
+	private void collectData() {
+		if (MVSPanel.getValue() != -1 && DPanel.getValue() != -1)
+			chartPanel.addValue(MVSPanel.getValue(), DPanel.getValue());
+		if (DPanel.getValue() < 10f) {
+			stopCollectingData();
+		}
+	}
+
+	public void newData(String data) {
+		if (collectingData) {
+			String output = data.substring(1);
+			switch (data.charAt(0)) {
+			case 'd':
+				DPanel.setNumLabel(output);
+				break;
+			case 'm':
+				MVSPanel.setNumLabel(output);
+				break;
+			}
+		}
+	}
+
+	public void startCollectingData() {
+		collectingData = true;
+		chartPanel.reset();
+		timeElapsed = 0;
+	}
+
+	public void stopCollectingData() {
+		collectingData = false;
+	}
+
+	public void continueCollectingData() {
+		collectingData = true;
+	}
+
+	public float getSlope() {
+		ArrayList<Vector2f> points = chartPanel.getPoints();
+
+		float numSlopes = 0;
+		float numerator = 0, denominator = 0;
+		float slope = 0;
+		for (int i = 0; i < points.size(); i++) {
+			for (int j = i + 1; j < points.size(); j++) {
+				numerator += ((points.get(j).x - points.get(i).x) * (points
+						.get(j).y - points.get(i).y));
+				denominator += ((points.get(j).x - points.get(i).x) * (points
+						.get(j).x - points.get(i).x));
+			}
+		}
+		slope = numerator / denominator;
+		
+		return slope;
+	}
+	
+	public void evaluateData() {
+		float currentSlope = getSlope();
+	}
+	
+	public void resize() {
+		chartPanel.resize();
+	}
+}

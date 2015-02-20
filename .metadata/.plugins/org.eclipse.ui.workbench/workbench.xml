@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="15" version="2.0">
+<workbench progressCount="22" version="2.0">
 <workbenchAdvisor/>
 <window height="768" maximized="true" width="1024" x="0" y="0">
 <fastViewData fastViewLocation="1024"/>
@@ -8,21 +8,21 @@
 </perspectiveBar>
 <coolbarLayout>
 <coolItem id="group.file" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="122" y="24"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="144" y="30"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
-<coolItem id="adt.actionSet.avdManager" itemType="typeToolBarContribution" x="58" y="24"/>
-<coolItem id="adt.actionSet.lint" itemType="typeToolBarContribution" x="50" y="24"/>
-<coolItem id="adt.actionSet.wizards" itemType="typeToolBarContribution" x="34" y="24"/>
-<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="130" y="24"/>
-<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="74" y="24"/>
-<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="74" y="24"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="106" y="24"/>
+<coolItem id="adt.actionSet.avdManager" itemType="typeToolBarContribution" x="68" y="30"/>
+<coolItem id="adt.actionSet.lint" itemType="typeToolBarContribution" x="60" y="30"/>
+<coolItem id="adt.actionSet.wizards" itemType="typeToolBarContribution" x="40" y="30"/>
+<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="156" y="30"/>
+<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="88" y="30"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="88" y="30"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="124" y="30"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.debug.ui.launch.toolbar" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.debug.ui.main.toolbar" itemType="typeToolBarContribution" x="34" y="24"/>
+<coolItem id="org.eclipse.debug.ui.main.toolbar" itemType="typeToolBarContribution" x="40" y="30"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="194" y="24"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="232" y="30"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
@@ -39,21 +39,51 @@
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
+<part id="3"/>
+<part id="4"/>
+<part id="5"/>
+<part id="6"/>
+<part id="7"/>
+<part id="8"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="/home/brehor/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/Main.java" title="Main.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/Main.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/Main.java" title="Main.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/Main.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Asteroid-Receiving-GUI/src/com/ludusamo/Main.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2536" selectionTopPixel="1207"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainComponent.java" partName="MainComponent.java" path="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java" title="MainComponent.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="902" selectionTopPixel="19"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PicturePanel.java" partName="PicturePanel.java" path="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/component/PicturePanel.java" title="PicturePanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/PicturePanel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/PicturePanel.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="735" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CommandInterpreter.java" partName="CommandInterpreter.java" path="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/util/CommandInterpreter.java" title="CommandInterpreter.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/util/CommandInterpreter.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Asteroid-Receiving-GUI/src/com/ludusamo/util/CommandInterpreter.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="772" selectionTopPixel="343"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="NumberPanel.java" partName="NumberPanel.java" path="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/component/NumberPanel.java" title="NumberPanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/NumberPanel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/NumberPanel.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2032" selectionTopPixel="610"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DataPanel.java" partName="DataPanel.java" path="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/component/DataPanel.java" title="DataPanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/DataPanel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/DataPanel.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainComponent.java" partName="MainComponent.java" path="/home/brehor/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java" title="MainComponent.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="4206" selectionTopPixel="536"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ControlPanel.java" partName="ControlPanel.java" path="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/component/ControlPanel.java" title="ControlPanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/ControlPanel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/ControlPanel.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="898" selectionTopPixel="60"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PicturePanel.java" partName="PicturePanel.java" path="/home/brehor/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/component/PicturePanel.java" title="PicturePanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/PicturePanel.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/PicturePanel.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="17"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TitlePanel.java" partName="TitlePanel.java" path="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/component/TitlePanel.java" title="TitlePanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/TitlePanel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/TitlePanel.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="314"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Util.java" partName="Util.java" path="/home/brendan/Copy/Ludusamo/Programming/Asteroid-Project/Asteroid-Receiving-GUI/src/com/ludusamo/util/Util.java" title="Util.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/util/Util.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Asteroid-Receiving-GUI/src/com/ludusamo/util/Util.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="365"/>
 </editor>
 </editors>
 <views>
@@ -63,8 +93,9 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
-<category IMemento.internal.id="Warnings (26 items)"/>
+<category IMemento.internal.id="Warnings (23 items)"/>
 <category IMemento.internal.id="Errors"/>
+<category IMemento.internal.id="Warnings"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="105" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.resourceField="105" org.eclipse.ui.ide.severityAndDescriptionField="1151"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -73,9 +104,6 @@
 <visible IMemento.internal.id="org.eclipse.ui.ide.locationField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.markerType"/>
 </viewState>
-</view>
-<view id="org.eclipse.ui.console.ConsoleView" partName="Console">
-<viewState/>
 </view>
 <view id="org.eclipse.jdt.ui.PackageExplorer" partName="Package Explorer">
 <viewState group_libraries="1" layout="2" linkWithEditor="0" rootMode="1" workingSetName="">
@@ -106,6 +134,9 @@
 </customFilters>
 </viewState>
 </view>
+<view id="org.eclipse.ui.console.ConsoleView" partName="Console">
+<viewState/>
+</view>
 <view id="org.eclipse.ui.views.TaskList" partName="Tasks">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.completionField" categoryGroup="none" markerContentGenerator="org.eclipse.ui.ide.tasksGenerator" partName="Tasks">
 <columnWidths org.eclipse.ui.ide.completionField="40" org.eclipse.ui.ide.descriptionField="350" org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="546" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.priorityField="35" org.eclipse.ui.ide.resourceField="105"/>
@@ -128,7 +159,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.ui.internal.ide.application.ResourcePerspective" id="org.eclipse.ui.resourcePerspective" label="Resource"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -210,10 +241,6 @@
 <alwaysOnActionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.ui.JavaElementCreationActionSet"/>
 <alwaysOnActionSet id="org.eclipse.ui.NavigateActionSet"/>
-<alwaysOnActionSet id="adt.actionSet.wizards"/>
-<alwaysOnActionSet id="adt.actionSet.avdManager"/>
-<alwaysOnActionSet id="adt.actionSet.lint"/>
-<alwaysOnActionSet id="adt.actionSet.refactorings"/>
 <alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.debug.ui.JDTDebugActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.junit.JUnitActionSet"/>
@@ -255,11 +282,11 @@
 <hide_toolbar_item_id id="org.eclipse.debug.ui.commands.RunToLine"/>
 <hide_toolbar_item_id id="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
-<view id="org.eclipse.jdt.ui.PackageExplorer"/>
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="org.eclipse.jdt.ui.PackageExplorer"/>
 <fastViewBars/>
 <layout>
 <mainWindow>
@@ -284,7 +311,7 @@
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.14285715" ratioLeft="227" ratioRight="1362" relationship="2" relative="left"/>
 <info folder="true" part="bottom" ratio="0.74967235" ratioLeft="572" ratioRight="191" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.ui.views.ProblemView" appearance="2" expanded="2">
+<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="Declaration"/>
@@ -317,44 +344,168 @@
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/Main.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/NumberPanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/util/CommandInterpreter.java"/>
+<editor factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" org.eclipse.jdt.ui.ClassFileIdentifier="=Asteroid-Receiving-GUI/\/home\/brendan\/Copy\/Ludusamo\/Programming\/Asteroid-Project\/Asteroid-Receiving-GUI\/LINUX_lib\/RXTXcomm.jar&lt;gnu.io(CommPortIdentifier.class"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/DataPanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/ControlPanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/TitlePanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/DataPanel.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/PicturePanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/Main.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/ControlPanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/util/Util.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/NumberPanel.java"/>
 </editors>
-<item historyLabel="Main.java" index="0">
+<item historyLabel="CommPortIdentifier.class" index="3">
 <position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MainComponent.java" index="1">
-<position info="not_deleted" x="5407" y="0"/>
-</item>
-<item historyLabel="NumberPanel.java" index="2">
-<position info="not_deleted" x="537" y="0"/>
-</item>
-<item historyLabel="MainComponent.java" index="1">
-<position info="not_deleted" x="5407" y="0"/>
-</item>
-<item historyLabel="PicturePanel.java" index="3">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MainComponent.java" index="1">
-<position info="not_deleted" x="5407" y="0"/>
-</item>
-<item historyLabel="MainComponent.java" index="1">
-<position info="not_deleted" x="5399" y="0"/>
-</item>
-<item historyLabel="PicturePanel.java" index="3">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="MainComponent.java" index="1">
-<position info="not_deleted" x="5396" y="0"/>
 </item>
 <item historyLabel="Main.java" index="0">
+<position info="not_deleted" x="2162" y="10"/>
+</item>
+<item historyLabel="MainComponent.java" index="1">
+<position info="not_deleted" x="5709" y="0"/>
+</item>
+<item historyLabel="Main.java" index="0">
+<position info="not_deleted" x="2162" y="10"/>
+</item>
+<item historyLabel="MainComponent.java" index="1">
+<position info="not_deleted" x="5709" y="0"/>
+</item>
+<item historyLabel="CommandInterpreter.java" index="2">
+<position info="not_deleted" x="1564" y="0"/>
+</item>
+<item historyLabel="DataPanel.java" index="4">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="PicturePanel.java" index="3">
+<item historyLabel="MainComponent.java" index="1">
+<position info="not_deleted" x="5709" y="0"/>
+</item>
+<item historyLabel="ControlPanel.java" index="5">
+<position info="not_deleted" x="898" y="0"/>
+</item>
+<item historyLabel="TitlePanel.java" index="6">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item active="true" historyLabel="MainComponent.java" index="1">
-<position info="not_deleted" x="5396" y="0"/>
+<item historyLabel="DataPanel.java" index="4">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="CommandInterpreter.java" index="2">
+<position info="not_deleted" x="1564" y="0"/>
+</item>
+<item historyLabel="MainComponent.java" index="7">
+<position info="not_deleted" x="5715" y="0"/>
+</item>
+<item historyLabel="DataPanel.java" index="8">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="PicturePanel.java" index="9">
+<position info="not_deleted" x="733" y="0"/>
+</item>
+<item historyLabel="MainComponent.java" index="7">
+<position info="not_deleted" x="5715" y="0"/>
+</item>
+<item historyLabel="Main.java" index="10">
+<position info="not_deleted" x="1998" y="10"/>
+</item>
+<item historyLabel="MainComponent.java" index="7">
+<position info="not_deleted" x="5715" y="0"/>
+</item>
+<item historyLabel="Main.java" index="10">
+<position info="not_deleted" x="1998" y="10"/>
+</item>
+<item historyLabel="MainComponent.java" index="7">
+<position info="not_deleted" x="3571" y="0"/>
+</item>
+<item historyLabel="Main.java" index="10">
+<position info="not_deleted" x="1998" y="10"/>
+</item>
+<item historyLabel="ControlPanel.java" index="11">
+<position info="not_deleted" x="898" y="0"/>
+</item>
+<item historyLabel="CommandInterpreter.java" index="2">
+<position info="not_deleted" x="1654" y="0"/>
+</item>
+<item historyLabel="Util.java" index="12">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="NumberPanel.java" index="13">
+<position info="not_deleted" x="2107" y="0"/>
+</item>
+<item historyLabel="MainComponent.java" index="7">
+<position info="not_deleted" x="5098" y="0"/>
+</item>
+<item historyLabel="Main.java" index="10">
+<position info="not_deleted" x="4015" y="0"/>
+</item>
+<item historyLabel="MainComponent.java" index="7">
+<position info="not_deleted" x="5098" y="0"/>
+</item>
+<item historyLabel="PicturePanel.java" index="9">
+<position info="not_deleted" x="735" y="0"/>
+</item>
+<item historyLabel="CommandInterpreter.java" index="2">
+<position info="not_deleted" x="1661" y="0"/>
+</item>
+<item historyLabel="NumberPanel.java" index="13">
+<position info="not_deleted" x="2032" y="0"/>
+</item>
+<item historyLabel="Main.java" index="10">
+<position info="not_deleted" x="4015" y="0"/>
+</item>
+<item historyLabel="MainComponent.java" index="7">
+<position info="not_deleted" x="5098" y="0"/>
+</item>
+<item historyLabel="Main.java" index="10">
+<position info="not_deleted" x="2260" y="0"/>
+</item>
+<item historyLabel="MainComponent.java" index="7">
+<position info="not_deleted" x="5699" y="0"/>
+</item>
+<item historyLabel="Main.java" index="10">
+<position info="not_deleted" x="2536" y="0"/>
+</item>
+<item historyLabel="MainComponent.java" index="7">
+<position info="not_deleted" x="5699" y="0"/>
+</item>
+<item historyLabel="MainComponent.java" index="7">
+<position info="not_deleted" x="1191" y="0"/>
+</item>
+<item historyLabel="Util.java" index="12">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ControlPanel.java" index="11">
+<position info="not_deleted" x="898" y="0"/>
+</item>
+<item historyLabel="NumberPanel.java" index="13">
+<position info="not_deleted" x="2032" y="0"/>
+</item>
+<item historyLabel="CommandInterpreter.java" index="2">
+<position info="not_deleted" x="732" y="0"/>
+</item>
+<item historyLabel="PicturePanel.java" index="9">
+<position info="not_deleted" x="735" y="0"/>
+</item>
+<item historyLabel="MainComponent.java" index="7">
+<position info="not_deleted" x="902" y="0"/>
+</item>
+<item historyLabel="Util.java" index="12">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ControlPanel.java" index="11">
+<position info="not_deleted" x="898" y="0"/>
+</item>
+<item historyLabel="NumberPanel.java" index="13">
+<position info="not_deleted" x="2032" y="0"/>
+</item>
+<item historyLabel="CommandInterpreter.java" index="2">
+<position info="not_deleted" x="732" y="0"/>
+</item>
+<item historyLabel="CommandInterpreter.java" index="2">
+<position info="not_deleted" x="803" y="0"/>
+</item>
+<item active="true" historyLabel="CommandInterpreter.java" index="2">
+<position info="not_deleted" x="784" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -362,6 +513,9 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
+<trimArea IMemento.internal.id="16384">
+<trimItem IMemento.internal.id="left"/>
+</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -369,15 +523,34 @@
 <trimItem IMemento.internal.id="org.eclise.ui.internal.FastViewBar"/>
 <trimItem IMemento.internal.id="org.eclipse.jface.action.StatusLineManager"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.progress.ProgressRegion"/>
+<trimItem IMemento.internal.id="bottom"/>
 </trimArea>
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PicturePanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/PicturePanel.java">
-<persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/PicturePanel.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Util.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/util/Util.java">
+<persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/util/Util.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TitlePanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/TitlePanel.java">
+<persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/TitlePanel.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ControlPanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/ControlPanel.java">
+<persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/ControlPanel.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DataPanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/DataPanel.java">
+<persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/DataPanel.java"/>
+</file>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="CommPortIdentifier.class" tooltip="gnu.io.CommPortIdentifier">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=Asteroid-Receiving-GUI/\/home\/brendan\/Copy\/Ludusamo\/Programming\/Asteroid-Project\/Asteroid-Receiving-GUI\/LINUX_lib\/RXTXcomm.jar&lt;gnu.io(CommPortIdentifier.class"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="NumberPanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/NumberPanel.java">
 <persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/NumberPanel.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CommandInterpreter.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/util/CommandInterpreter.java">
+<persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/util/CommandInterpreter.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PicturePanel.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/PicturePanel.java">
+<persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/PicturePanel.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="MainComponent.java" tooltip="Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java">
 <persistable path="/Asteroid-Receiving-GUI/src/com/ludusamo/component/MainComponent.java"/>
@@ -399,24 +572,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="steel-trial3.dat" tooltip="Asteroid-Receiving-GUI/data/steel-trial3.dat">
 <persistable path="/Asteroid-Receiving-GUI/data/steel-trial3.dat"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="steel-trial2.dat" tooltip="Asteroid-Receiving-GUI/data/steel-trial2.dat">
-<persistable path="/Asteroid-Receiving-GUI/data/steel-trial2.dat"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="steel-trial1.dat" tooltip="Asteroid-Receiving-GUI/data/steel-trial1.dat">
-<persistable path="/Asteroid-Receiving-GUI/data/steel-trial1.dat"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="aluminum-trialTextBook2.dat" tooltip="Asteroid-Receiving-GUI/data/aluminum-trialTextBook2.dat">
-<persistable path="/Asteroid-Receiving-GUI/data/aluminum-trialTextBook2.dat"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="aluminum-trialTextBook1.dat" tooltip="Asteroid-Receiving-GUI/data/aluminum-trialTextBook1.dat">
-<persistable path="/Asteroid-Receiving-GUI/data/aluminum-trialTextBook1.dat"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="aluminum-trial5.dat" tooltip="Asteroid-Receiving-GUI/data/aluminum-trial5.dat">
-<persistable path="/Asteroid-Receiving-GUI/data/aluminum-trial5.dat"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="aluminum-trial4.dat" tooltip="Asteroid-Receiving-GUI/data/aluminum-trial4.dat">
-<persistable path="/Asteroid-Receiving-GUI/data/aluminum-trial4.dat"/>
 </file>
 </mruList>
 </workbench>

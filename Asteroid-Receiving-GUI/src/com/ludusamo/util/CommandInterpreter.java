@@ -30,6 +30,10 @@ public class CommandInterpreter {
 
 	private void processCommand(String cmd) {
 		if (cmd.equals("start")) {
+			if (!mc.hasPort) {
+				outputLabel.setText("No Receiver Connected.");
+				return;
+			}
 			mc.startTrial();
 			mc.getPicturePanel().setPicture(2);
 			outputLabel.setText("Starting Data Collection");
@@ -54,12 +58,9 @@ public class CommandInterpreter {
 			mc.evaluateData();
 			outputLabel.setText("Evaluating Data...");
 		}
-		if (cmd.equals("doge")) {
-			mc.stopCollectingData();
-			mc.getPicturePanel().setPicture(3);
-			mc.getDPanel().setNumLabel("Much Distance");
-			mc.getMVSPanel().setNumLabel("Such Magnetic");
-			outputLabel.setText("#doge");
+		if (cmd.equals("checkCommPort")) {
+			mc.checkComm();
+			outputLabel.setText("Checking For Comm Port.");
 		}
 	}
 }
